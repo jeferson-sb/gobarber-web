@@ -10,9 +10,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logo from '../../assets/logo.svg';
-import {
-  Container, Content, Background, AnimatedContainer,
-} from './styles';
+import {Container, Content, Background, AnimatedContainer,} from './styles';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
