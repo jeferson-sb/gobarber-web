@@ -1,7 +1,5 @@
 import React, { useCallback, useRef, ChangeEvent } from 'react';
-import {
-  FiMail, FiLock, FiUser, FiCamera, FiArrowLeft,
-} from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiCamera, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -15,7 +13,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, AvatarInput } from './styles';
-import { useAuth } from '../../hooks/auth';
+import { useAuth, User } from '../../hooks/auth';
 
 interface ProfileFormData {
   name: string;
@@ -44,13 +42,13 @@ const Profile: React.FC = () => {
             .required('E-mail is required'),
           old_password: Yup.string(),
           password: Yup.string().when('old_password', {
-            is: (val) => !!val.length,
+            is: val => !!val.length,
             then: Yup.string().required('Required field'),
             otherwise: Yup.string(),
           }),
           password_confirmation: Yup.string()
             .when('old_password', {
-              is: (val) => !!val.length,
+              is: val => !!val.length,
               then: Yup.string().required('Required field'),
               otherwise: Yup.string(),
             })
@@ -60,7 +58,11 @@ const Profile: React.FC = () => {
         await schema.validate(profileData, { abortEarly: false });
 
         const {
-          password, passwordConfirmation, oldPassword, name, email,
+          password,
+          passwordConfirmation,
+          oldPassword,
+          name,
+          email,
         } = profileData;
 
         const formData = {
@@ -68,16 +70,17 @@ const Profile: React.FC = () => {
           email,
           ...(oldPassword
             ? {
-              old_password: oldPassword,
-              password,
-              password_confirmation: passwordConfirmation,
-            }
+                old_password: oldPassword,
+                password,
+                password_confirmation: passwordConfirmation,
+              }
             : {}),
         };
 
-        const response = await api.put('api/profile', { json: formData });
-        const data = response.json();
-        updateUser(data);
+        const response: User = await api
+          .put('api/profile', { json: formData })
+          .json();
+        updateUser(response);
 
         history.push('/dashboard');
 
@@ -95,7 +98,8 @@ const Profile: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Update error',
-          description: 'An error has ocorreu while updating profile, please try again',
+          description:
+            'An error has ocorreu while updating profile, please try again',
         });
       }
     },
@@ -103,19 +107,18 @@ const Profile: React.FC = () => {
   );
 
   const handleAvatarChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    async (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         const data = new FormData();
         const { files } = e.target;
         data.append('avatar', files[0]);
-        api.patch('api/users/avatar', { body: data }).then((response) => {
-          const avatarData = response.json();
-          updateUser(avatarData);
-
-          addToast({
-            type: 'success',
-            title: 'Avatar updated!',
-          });
+        const response: User = await api
+          .patch('api/users/avatar', { body: data })
+          .json();
+        updateUser(response);
+        addToast({
+          type: 'success',
+          title: 'Avatar updated!',
         });
       }
     },

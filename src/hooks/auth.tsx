@@ -1,9 +1,7 @@
-import React, {
-  createContext, useCallback, useState, useContext,
-} from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
-interface User {
+export interface User {
   id: string;
   name: string;
   avatarUrl: string;
@@ -39,7 +37,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       api.extend({
         hooks: {
           beforeRequest: [
-            (request) => {
+            request => {
               request.headers.set('Authorization', `Bearer ${storagedToken}`);
             },
           ],
@@ -69,7 +67,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     api.extend({
       hooks: {
         beforeRequest: [
-          (request) => {
+          request => {
             request.headers.set('Authorization', `Bearer ${token}`);
           },
         ],

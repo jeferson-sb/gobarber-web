@@ -1,10 +1,6 @@
-import React, {
-  useState, useCallback, useEffect, useMemo,
-} from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { FiPower, FiClock } from 'react-icons/fi';
-import {
-  isToday, format, parseISO, isAfter,
-} from 'date-fns';
+import { isToday, format, parseISO, isAfter } from 'date-fns';
 
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -65,13 +61,14 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchMonthAvailability() {
-      const response = await api
+      const response: MonthAvailabilityItem[] = await api
         .get(`api/providers/${user.id}/month-availability`, {
           searchParams: {
             year: currentMonth.getFullYear(),
             month: currentMonth.getMonth() + 1,
           },
-        }).json();
+        })
+        .json();
       setMonthAvailability(response);
     }
 
@@ -79,30 +76,33 @@ const Dashboard: React.FC = () => {
   }, [currentMonth, user.id]);
 
   useEffect(() => {
-    api
-      .get('api/appointments/me', {
-        searchParams: {
-          year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
-          day: selectedDate.getDate(),
-        },
-      })
-      .then((response) => {
-        const data = response.json();
-        // TODO: Fix type checking
+    async function fetchScheduleAppointments() {
+      const response: Appointment[] = await api
+        .get('api/appointments/me', {
+          searchParams: {
+            year: selectedDate.getFullYear(),
+            month: selectedDate.getMonth() + 1,
+            day: selectedDate.getDate(),
+          },
+        })
+        .json();
 
-        const appointmentsFormatted = data.map((appointment) => ({
+      const appointmentsFormatted = response.map(
+        (appointment: Appointment) => ({
           ...appointment,
           hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-        }));
-        setAppointments(data.body);
-      });
+        }),
+      );
+      setAppointments(appointmentsFormatted);
+    }
+
+    fetchScheduleAppointments();
   }, [selectedDate]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
-      .filter((monthDay) => monthDay.available === false)
-      .map((monthDay) => {
+      .filter(monthDay => monthDay.available === false)
+      .map(monthDay => {
         const year = currentMonth.getFullYear();
         const month = currentMonth.getMonth();
 
@@ -112,17 +112,37 @@ const Dashboard: React.FC = () => {
     return dates;
   }, [currentMonth, monthAvailability]);
 
-  const selectedDateAsText = useMemo(() => format(selectedDate, "'Dia' dd 'de' MMMM", {
-    locale: ptBR,
-  }), [selectedDate]);
+  const selectedDateAsText = useMemo(() => format(selectedDate, 'dd MMMM'), [
+    selectedDate,
+  ]);
 
-  const selectedWeekDay = useMemo(() => format(selectedDate, 'cccc'), [selectedDate]);
+  const selectedWeekDay = useMemo(() => format(selectedDate, 'cccc'), [
+    selectedDate,
+  ]);
 
-  const morningAppointments = useMemo(() => appointments.filter((appointment) => parseISO(appointment.date).getHours() < 12), [appointments]);
+  const morningAppointments = useMemo(
+    () =>
+      appointments.filter(
+        appointment => parseISO(appointment.date).getHours() < 12,
+      ),
+    [appointments],
+  );
 
-  const afternoonAppointments = useMemo(() => appointments.filter((appointment) => parseISO(appointment.date).getHours() >= 12), [appointments]);
+  const afternoonAppointments = useMemo(
+    () =>
+      appointments.filter(
+        appointment => parseISO(appointment.date).getHours() >= 12,
+      ),
+    [appointments],
+  );
 
-  const nextAppointment = useMemo(() => appointments.find((appointment) => isAfter(parseISO(appointment.date), new Date())), [appointments]);
+  const nextAppointment = useMemo(
+    () =>
+      appointments.find(appointment =>
+        isAfter(parseISO(appointment.date), new Date()),
+      ),
+    [appointments],
+  );
 
   return (
     <Container>
@@ -180,7 +200,7 @@ const Dashboard: React.FC = () => {
               <p>No appointments for this period.</p>
             )}
 
-            {morningAppointments.map((appointment) => (
+            {morningAppointments.map(appointment => (
               <Appointment key={appointment.id}>
                 <span>
                   <FiClock />
@@ -205,7 +225,7 @@ const Dashboard: React.FC = () => {
               <p>No appointments for this period.</p>
             )}
 
-            {afternoonAppointments.map((appointment) => (
+            {afternoonAppointments.map(appointment => (
               <Appointment key={appointment.id}>
                 <span>
                   <FiClock />
@@ -228,9 +248,7 @@ const Dashboard: React.FC = () => {
             fromMonth={new Date()}
             disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
             selectedDays={selectedDate}
-            modifiers={{
-              available: { daysOfWeek: [1, 2, 3, 4, 5] },
-            }}
+            modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
             onMonthChange={handleMonthChange}
             onDayClick={handleDateChange}
           />
