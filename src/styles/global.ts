@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-// color, state, variation (white-10, white-20)
-
 export default createGlobalStyle`
   *, *::before, *::after{
     box-sizing: border-box;
