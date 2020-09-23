@@ -10,7 +10,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logo from '../../assets/logo.svg';
-import {Container, Content, Background, AnimatedContainer,} from './styles';
+import { Container, Content, Background, AnimatedContainer } from './styles';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -84,10 +84,12 @@ const SignIn: React.FC = () => {
               icon={FiLock}
               name="password"
               type="password"
-              placeholder="Senha"
+              placeholder="Password"
             />
 
-            <Button type="submit">Sign In</Button>
+            <Button type="submit" data-testid="signInBtn">
+              Sign In
+            </Button>
 
             <Link to="/forgot-password">Forgot password</Link>
           </Form>

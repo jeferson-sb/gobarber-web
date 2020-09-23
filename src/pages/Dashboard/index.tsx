@@ -61,15 +61,19 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchMonthAvailability() {
-      const response: MonthAvailabilityItem[] = await api
-        .get(`api/providers/${user.id}/month-availability`, {
-          searchParams: {
-            year: currentMonth.getFullYear(),
-            month: currentMonth.getMonth() + 1,
-          },
-        })
-        .json();
-      setMonthAvailability(response);
+      try {
+        const response: MonthAvailabilityItem[] = await api
+          .get(`api/providers/${user.id}/month-availability`, {
+            searchParams: {
+              year: currentMonth.getFullYear(),
+              month: currentMonth.getMonth() + 1,
+            },
+          })
+          .json();
+        setMonthAvailability(response);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     fetchMonthAvailability();
@@ -77,23 +81,26 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function fetchScheduleAppointments() {
-      const response: Appointment[] = await api
-        .get('api/appointments/me', {
-          searchParams: {
-            year: selectedDate.getFullYear(),
-            month: selectedDate.getMonth() + 1,
-            day: selectedDate.getDate(),
-          },
-        })
-        .json();
-
-      const appointmentsFormatted = response.map(
-        (appointment: Appointment) => ({
-          ...appointment,
-          hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-        }),
-      );
-      setAppointments(appointmentsFormatted);
+      try {
+        const response: Appointment[] = await api
+          .get('api/appointments/me', {
+            searchParams: {
+              year: selectedDate.getFullYear(),
+              month: selectedDate.getMonth() + 1,
+              day: selectedDate.getDate(),
+            },
+          })
+          .json();
+        const appointmentsFormatted = response.map(
+          (appointment: Appointment) => ({
+            ...appointment,
+            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+          }),
+        );
+        setAppointments(appointmentsFormatted);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     fetchScheduleAppointments();
