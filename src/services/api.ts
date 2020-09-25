@@ -1,5 +1,5 @@
-import ky from 'ky';
+import axios from 'axios';
 
-const api = ky.create({ prefixUrl: process.env.REACT_APP_SERVER_URL });
+const api = axios.create({ baseURL: process.env.REACT_APP_SERVER_URL });
 
 export default api;
