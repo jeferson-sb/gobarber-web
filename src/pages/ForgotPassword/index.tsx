@@ -10,7 +10,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logo from '../../assets/logo.svg';
-import {Container, Content, Background, AnimatedContainer,} from './styles';
+import { Container, Content, Background, AnimatedContainer } from './styles';
 
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
@@ -40,7 +40,7 @@ const ForgotPassword: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('api/password/forgot', {json: {email: data.email,},});
+        await api.post('api/password/forgot', { email: data.email });
 
         addToast({
           type: 'success',

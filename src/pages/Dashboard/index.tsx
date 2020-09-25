@@ -62,15 +62,16 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function fetchMonthAvailability() {
       try {
-        const response: MonthAvailabilityItem[] = await api
-          .get(`api/providers/${user.id}/month-availability`, {
-            searchParams: {
+        const response = await api.get(
+          `api/providers/${user.id}/month-availability`,
+          {
+            params: {
               year: currentMonth.getFullYear(),
               month: currentMonth.getMonth() + 1,
             },
-          })
-          .json();
-        setMonthAvailability(response);
+          },
+        );
+        setMonthAvailability(response.data as MonthAvailabilityItem[]);
       } catch (error) {
         console.error(error);
       }
@@ -82,16 +83,15 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function fetchScheduleAppointments() {
       try {
-        const response: Appointment[] = await api
-          .get('api/appointments/me', {
-            searchParams: {
-              year: selectedDate.getFullYear(),
-              month: selectedDate.getMonth() + 1,
-              day: selectedDate.getDate(),
-            },
-          })
-          .json();
-        const appointmentsFormatted = response.map(
+        const response = await api.get('api/appointments/me', {
+          params: {
+            year: selectedDate.getFullYear(),
+            month: selectedDate.getMonth() + 1,
+            day: selectedDate.getDate(),
+          },
+        });
+        const appointsments: Appointment[] = response.data;
+        const appointmentsFormatted = appointsments.map(
           (appointment: Appointment) => ({
             ...appointment,
             hourFormatted: format(parseISO(appointment.date), 'HH:mm'),

@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 79.5rem;
-  width: 86%;
+  width: 100%;
 `;
 
 export const Header = styled.header`

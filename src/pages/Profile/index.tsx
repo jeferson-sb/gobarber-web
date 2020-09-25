@@ -18,9 +18,9 @@ import { useAuth, User } from '../../hooks/auth';
 interface ProfileFormData {
   name: string;
   email: string;
-  oldPassword: string;
+  old_password: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
@@ -59,27 +59,27 @@ const Profile: React.FC = () => {
 
         const {
           password,
-          passwordConfirmation,
-          oldPassword,
+          password_confirmation,
+          old_password,
           name,
           email,
         } = profileData;
 
+        console.log(profileData);
+
         const formData = {
           name,
           email,
-          ...(oldPassword
+          ...(old_password
             ? {
-                old_password: oldPassword,
+                old_password,
                 password,
-                password_confirmation: passwordConfirmation,
+                password_confirmation,
               }
             : {}),
         };
 
-        const response: User = await api
-          .put('api/profile', { json: formData })
-          .json();
+        const response: User = await api.put('api/profile', formData);
         updateUser(response);
 
         history.push('/dashboard');
@@ -112,9 +112,7 @@ const Profile: React.FC = () => {
         const data = new FormData();
         const { files } = e.target;
         data.append('avatar', files[0]);
-        const response: User = await api
-          .patch('api/users/avatar', { body: data })
-          .json();
+        const response: User = await api.patch('api/users/avatar', data);
         updateUser(response);
         addToast({
           type: 'success',
@@ -175,9 +173,9 @@ const Profile: React.FC = () => {
             placeholder="New password"
           />
           <Input
-            type="password_confirmation"
+            type="password"
             icon={FiLock}
-            name="password"
+            name="password_confirmation"
             placeholder="Confirm password"
           />
 

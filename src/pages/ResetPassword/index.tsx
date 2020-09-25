@@ -10,7 +10,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import logo from '../../assets/logo.svg';
-import {Container, Content, Background, AnimatedContainer,} from './styles';
+import { Container, Content, Background, AnimatedContainer } from './styles';
 
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
@@ -49,11 +49,9 @@ const SignIn: React.FC = () => {
         }
 
         await api.post('/password/reset', {
-          json: {
-            password: data.password,
-            password_confirmation: data.passwordConfirmation,
-            token,
-          },
+          password: data.password,
+          password_confirmation: data.passwordConfirmation,
+          token,
         });
 
         history.push('/');
@@ -67,7 +65,8 @@ const SignIn: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Reset password error',
-          description: 'An error has occurred while resetting your password, please try again',
+          description:
+            'An error has occurred while resetting your password, please try again',
         });
       }
     },

@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import {FiMail, FiLock, FiUser, FiArrowLeft,} from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 
 import logo from '../../assets/logo.svg';
 
-import {Container, Content, Background, AnimatedContainer,} from './styles';
+import { Container, Content, Background, AnimatedContainer } from './styles';
 
 interface SignUpFormData {
   name: string;
@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('api/users', { json: { ...data } });
+        await api.post('api/users', data);
 
         history.push('/');
 
@@ -97,7 +97,7 @@ const SignUp: React.FC = () => {
 
           <Link to="/">
             <FiArrowLeft />
-            Go back
+            Log in
           </Link>
         </AnimatedContainer>
       </Content>
