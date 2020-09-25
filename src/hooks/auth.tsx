@@ -34,15 +34,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const storagedUser = localStorage.getItem('@gobarber:user');
 
     if (storagedToken && storagedUser) {
-      api.extend({
-        hooks: {
-          beforeRequest: [
-            request => {
-              request.headers.set('Authorization', `Bearer ${storagedToken}`);
-            },
-          ],
-        },
-      });
+      api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
       return { token: storagedToken, user: JSON.parse(storagedUser) };
     }
 
@@ -50,30 +42,17 @@ export const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await api
-      .post('api/sessions', {
-        json: {
-          email,
-          password,
-        },
-      })
-      .json();
+    const response = await api.post<AuthState>('api/sessions', {
+      email,
+      password,
+    });
 
-    const { token, user } = response as AuthState;
+    const { token, user } = response.data;
 
     localStorage.setItem('@gobarber:token', token);
     localStorage.setItem('@gobarber:user', JSON.stringify(user));
 
-    api.extend({
-      hooks: {
-        beforeRequest: [
-          request => {
-            request.headers.set('Authorization', `Bearer ${token}`);
-          },
-        ],
-      },
-    });
-
+    api.defaults.headers.Authorization = `Bearer ${token}`;
     setData({ token, user });
   }, []);
 
@@ -112,10 +91,5 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 export const useAuth = (): AuthContextData => {
   const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within a AuthProvider');
-  }
-
   return context;
 };
