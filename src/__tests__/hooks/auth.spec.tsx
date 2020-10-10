@@ -19,9 +19,7 @@ describe('Auth hook', () => {
 
     const setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
 
-    const { result, waitForNextUpdate } = renderHook(() => useAuth(), {
-      wrapper: AuthProvider,
-    });
+    const { result, waitForNextUpdate } = renderHook(() => useAuth(), {wrapper: AuthProvider,});
 
     result.current.signIn({
       email: 'johndoe@example.com',
@@ -57,9 +55,7 @@ describe('Auth hook', () => {
       }
     });
 
-    const { result } = renderHook(() => useAuth(), {
-      wrapper: AuthProvider,
-    });
+    const { result } = renderHook(() => useAuth(), {wrapper: AuthProvider,});
 
     expect(result.current.user.email).toEqual('johndoe@example.com');
   });
@@ -82,9 +78,7 @@ describe('Auth hook', () => {
 
     const removeItemSpy = jest.spyOn(Storage.prototype, 'removeItem');
 
-    const { result } = renderHook(() => useAuth(), {
-      wrapper: AuthProvider,
-    });
+    const { result } = renderHook(() => useAuth(), {wrapper: AuthProvider,});
 
     act(() => {
       result.current.signOut();
@@ -97,9 +91,7 @@ describe('Auth hook', () => {
   it('should be able to update user data', () => {
     const setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
 
-    const { result } = renderHook(() => useAuth(), {
-      wrapper: AuthProvider,
-    });
+    const { result } = renderHook(() => useAuth(), {wrapper: AuthProvider,});
 
     const user = {
       id: 'user-123',

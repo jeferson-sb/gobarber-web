@@ -4,7 +4,7 @@ import api from '../services/api';
 export interface User {
   id: string;
   name: string;
-  avatarUrl: string;
+  avatar_url: string;
   email: string;
 }
 

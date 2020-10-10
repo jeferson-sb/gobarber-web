@@ -13,6 +13,7 @@ import Profile from '../pages/Profile';
 const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={SignIn} />
+    <Route path="/signin" component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />

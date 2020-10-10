@@ -65,8 +65,6 @@ const Profile: React.FC = () => {
           email,
         } = profileData;
 
-        console.log(profileData);
-
         const formData = {
           name,
           email,
@@ -143,7 +141,7 @@ const Profile: React.FC = () => {
           }}
         >
           <AvatarInput>
-            <img src={user.avatarUrl} alt={user.name} />
+            <img src={user.avatar_url} alt={user.name} />
             <label htmlFor="avatar">
               <FiCamera size={20} />
               <input

@@ -30,11 +30,11 @@ interface MonthAvailabilityItem {
 
 interface Appointment {
   id: string;
-  date: string;
+  datetime: string;
   hourFormatted: string;
   user: {
     name: string;
-    avatarUrl: string;
+    avatar_url: string;
   };
 }
 
@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
         );
         setMonthAvailability(response.data as MonthAvailabilityItem[]);
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
     }
 
@@ -94,12 +94,12 @@ const Dashboard: React.FC = () => {
         const appointmentsFormatted = appointsments.map(
           (appointment: Appointment) => ({
             ...appointment,
-            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+            hourFormatted: format(parseISO(appointment.datetime), 'HH:mm'),
           }),
         );
         setAppointments(appointmentsFormatted);
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
     }
 
@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
   const morningAppointments = useMemo(
     () =>
       appointments.filter(
-        appointment => parseISO(appointment.date).getHours() < 12,
+        appointment => parseISO(appointment.datetime).getHours() < 12,
       ),
     [appointments],
   );
@@ -138,7 +138,7 @@ const Dashboard: React.FC = () => {
   const afternoonAppointments = useMemo(
     () =>
       appointments.filter(
-        appointment => parseISO(appointment.date).getHours() >= 12,
+        appointment => parseISO(appointment.datetime).getHours() >= 12,
       ),
     [appointments],
   );
@@ -146,7 +146,7 @@ const Dashboard: React.FC = () => {
   const nextAppointment = useMemo(
     () =>
       appointments.find(appointment =>
-        isAfter(parseISO(appointment.date), new Date()),
+        isAfter(parseISO(appointment.datetime), new Date()),
       ),
     [appointments],
   );
@@ -158,7 +158,7 @@ const Dashboard: React.FC = () => {
           <img src={logoImg} alt="Gobarber Logo" />
 
           <Profile>
-            <img src={user.avatarUrl} alt={user.name} />
+            <img src={user.avatar_url} alt={user.name} />
             <div>
               <span>Welcome,</span>
               <Link to="/profile">
@@ -187,7 +187,7 @@ const Dashboard: React.FC = () => {
               <strong>Next appointment</strong>
               <div>
                 <img
-                  src={nextAppointment.user.avatarUrl}
+                  src={nextAppointment.user.avatar_url}
                   alt={nextAppointment.user.name}
                 />
 
@@ -216,7 +216,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatarUrl}
+                    src={appointment.user.avatar_url}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>
@@ -241,7 +241,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatarUrl}
+                    src={appointment.user.avatar_url}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>

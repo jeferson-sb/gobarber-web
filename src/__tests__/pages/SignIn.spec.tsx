@@ -9,27 +9,17 @@ const mockedAddToast = jest.fn();
 
 jest.mock('react-router-dom', () => {
   return {
-    useHistory: () => ({
-      push: mockedHistoryPush,
-    }),
+    useHistory: () => ({push: mockedHistoryPush,}),
     Link: ({ children }: { children: React.ReactNode }) => children,
   };
 });
 
 jest.mock('../../hooks/auth', () => {
-  return {
-    useAuth: () => ({
-      signIn: mockedSignIn,
-    }),
-  };
+  return {useAuth: () => ({signIn: mockedSignIn,}),};
 });
 
 jest.mock('../../hooks/toast', () => {
-  return {
-    useToast: () => ({
-      addToast: mockedAddToast,
-    }),
-  };
+  return {useToast: () => ({addToast: mockedAddToast,}),};
 });
 
 describe('SignIn Page', () => {

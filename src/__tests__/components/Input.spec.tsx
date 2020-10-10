@@ -47,9 +47,7 @@ describe('Input component', () => {
     const inputElement = screen.getByPlaceholderText('E-mail');
     const containerElement = screen.getByTestId('input-container');
 
-    fireEvent.change(inputElement, {
-      target: { value: 'johndoe@example.com.br' },
-    });
+    fireEvent.change(inputElement, {target: { value: 'johndoe@example.com.br' },});
 
     fireEvent.blur(inputElement);
 
