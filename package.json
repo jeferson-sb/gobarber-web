@@ -2,6 +2,15 @@
   "name": "gobarber-web",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:analyze": "cra-bundle-analyzer",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll false",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .ts,.tsx --fix"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -18,16 +27,9 @@
     "react-scripts": "3.4.3",
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2",
+    "typescript": "^4.0.3",
     "uuid": "^8.3.1",
     "yup": "^0.29.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "browserslist": {
     "production": [
@@ -72,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "^3.10.0",
     "@typescript-eslint/parser": "^3.10.0",
     "axios-mock-adapter": "^1.18.2",
+    "cra-bundle-analyzer": "^0.1.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
