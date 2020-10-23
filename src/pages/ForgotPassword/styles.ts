@@ -43,31 +43,8 @@ export const AnimatedContainer = styled.div`
 
   animation: ${slideRight} 1s;
 
-  form {
-    margin: 20px 0;
-    width: 340px;
-    text-align: center;
-
-    h1 {
-      margin-bottom: 24px;
-    }
-
-    a {
-      color: #f4ede8;
-      display: block;
-      margin-top: 24px;
-      text-decoration: none;
-      transition: filter 0.2s ease;
-
-      &:hover {
-        filter: brightness(60%);
-      }
-    }
-  }
-
   > a {
-    color: #ff9000;
-    display: block;
+    color: var(--color-primary);
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
@@ -81,6 +58,28 @@ export const AnimatedContainer = styled.div`
 
     &:hover {
       filter: brightness(60%);
+    }
+  }
+
+  form {
+    margin: 20px 0;
+    width: 340px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 24px;
+    }
+
+    a {
+      color: var(--color-gray-200);
+      display: block;
+      margin-top: 24px;
+      text-decoration: none;
+      transition: filter 0.2s ease;
+
+      &:hover {
+        filter: brightness(60%);
+      }
     }
   }
 `;

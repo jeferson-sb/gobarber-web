@@ -17,6 +17,7 @@ export default createGlobalStyle`
     --color-secondary: #312e38;
     --color-primary--hover: hsl(var(--color-primary), 100%, 44%);
     --color-gray-200: #f4ede8;
+    --color-red-500: #c53030;
 
     --font-serif: 'Roboto Slab', serif;
     --font-sans: Helvetica, Arial, sans-serif;
@@ -32,7 +33,7 @@ export default createGlobalStyle`
     background: var(--color-secondary);
     color: var(--color-white);
   }
-  
+
   body, input, button {
     font-family: var(--font-serif);
     font-size: 1rem;

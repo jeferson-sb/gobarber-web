@@ -50,12 +50,12 @@ export const Profile = styled.div`
     line-height: 24px;
 
     span {
-      color: #f4ede8;
+      color: var(--color-gray-200);
     }
 
     a {
       text-decoration: none;
-      color: #ff9000;
+      color: var(--color-primary);
 
       &:hover {
         opacity: 0.8;
@@ -80,7 +80,7 @@ export const Schedule = styled.div`
 
   p {
     margin-top: 8px;
-    color: #ff9000;
+    color: var(--color-primary);
     display: flex;
     align-items: center;
 
@@ -93,7 +93,7 @@ export const Schedule = styled.div`
       content: '';
       width: 1px;
       height: 12px;
-      background: #ff9000;
+      background: var(--color-primary);
       margin: 0 8px;
     }
   }
@@ -124,7 +124,7 @@ export const NextAppointment = styled.div`
       width: 1px;
       left: 0;
       top: 10%;
-      background: #ff9000;
+      background: var(--color-primary);
     }
 
     img {
@@ -135,7 +135,7 @@ export const NextAppointment = styled.div`
 
     strong {
       margin-left: 24px;
-      color: #fff;
+      color: var(--color-white);
     }
 
     span {
@@ -145,7 +145,7 @@ export const NextAppointment = styled.div`
       color: #999591;
 
       svg {
-        color: #ff9000;
+        color: var(--color-primary);
         margin-right: 8px;
       }
     }
@@ -182,11 +182,11 @@ export const Appointment = styled.div`
     margin-left: auto;
     display: flex;
     align-items: center;
-    color: #f4ede8;
+    color: var(--color-gray-200);
     width: 70px;
 
     svg {
-      color: #ff9000;
+      color: var(--color-primary);
       margin-right: 8px;
     }
   }
@@ -208,7 +208,7 @@ export const Appointment = styled.div`
 
     strong {
       margin-left: 24px;
-      color: #fff;
+      color: var(--color-white);
       font-size: 20px;
     }
   }
@@ -245,7 +245,7 @@ export const Calendar = styled.aside`
   .DayPicker-Day--available:not(.DayPicker-Day--outside) {
     background: #3e3b47;
     border-radius: 10px;
-    color: #fff;
+    color: var(--color-white);
   }
 
   .DayPicker:not(.DayPicker--interactionDisabled)
@@ -263,7 +263,7 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: var(--color-primary) !important;
     border-radius: 10px;
     color: #232129 !important;
   }

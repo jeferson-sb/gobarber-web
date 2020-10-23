@@ -24,7 +24,7 @@ const slideLeft = keyframes`
     opacity: 0;
     transform: translateX(50px);
   }
-  to{
+  to {
     opacity: 1;
     transform: translateX(0);
   }
@@ -62,7 +62,6 @@ export const AnimatedContainer = styled.div`
 
   > a {
     color: var(--color-primary);
-    display: block;
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;

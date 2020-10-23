@@ -1,9 +1,10 @@
 <div align="center">
   <img src=".github/logo-dark.svg" style="margin-bottom: 20px" />
 
-  ![](https://img.shields.io/badge/GoStack-12-blueviolet?style=flat-square&logo=react)
-  ![](https://img.shields.io/badge/TypeScript-4.0.3-blue?style=flat-square)
-  ![](https://img.shields.io/badge/React-16.13-blue?style=flat-square&logo=react)
+![](https://img.shields.io/badge/GoStack-12-blueviolet?style=flat-square&logo=react)
+![](https://img.shields.io/badge/TypeScript-4.0.3-blue?style=flat-square)
+![](https://img.shields.io/badge/React-16.13-blue?style=flat-square&logo=react)
+
 </div>
 
 ## 💡 Project
@@ -44,7 +45,11 @@ $ yarn test
 ## Linting
 
 ```sh
-$ yarn lint
+# TS/TSX Files
+$ yarn lint:ts
+
+# CSS
+$ yarn lint:css
 ```
 
 ## 📝 License

@@ -23,28 +23,30 @@ export const Container = styled.div<ContainerProps>`
     margin-top: 8px;
   }
 
-  ${(props) => props.hasErrors
-    && css`
-      border-color: #c53030;
+  ${props =>
+    props.hasErrors &&
+    css`
+      border-color: var(--color-red-500);
     `}
 
-
-  ${(props) => props.isFocused
-    && css`
-      color: #ff9000;
-      border-color: #ff9000;
+  ${props =>
+    props.isFocused &&
+    css`
+      color: var(--color-primary);
+      border-color: var(--color-primary);
     `}
 
-  ${(props) => props.isFilled
-    && css`
-      color: #ff9000;
+  ${props =>
+    props.isFilled &&
+    css`
+      color: var(--color-primary);
     `}
 
   input {
     flex: 1;
     background: transparent;
     border: 0;
-    color: #f4ede8;
+    color: var(--color-gray-200);
 
     &:focus {
       outline: 0;
@@ -69,11 +71,11 @@ export const Error = styled(Tooltip)`
   }
 
   span {
-    background: #c53030;
-    color: #fff;
+    background: var(--color-red-500);
+    color: var(--color-white);
 
     &::before {
-      border-color: #c53030 transparent;
+      border-color: var(--color-red-500) transparent;
     }
   }
 `;
