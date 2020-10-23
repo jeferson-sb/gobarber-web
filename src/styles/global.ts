@@ -1,8 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  *, *::before, *::after{
+  *, *::before, *::after {
     box-sizing: border-box;
+  }
+
+  /* Remove default padding */
+  ul[class],
+  ol[class] {
+    padding: 0;
   }
 
   :root {
@@ -18,22 +24,38 @@ export default createGlobalStyle`
     --shadow-sm: 0px 2px 4px rgba(37, 37, 37, 0.1);
   }
 
-  html, body{
-    background: var(--color-secondary);
+  html, body {
     margin: 0;
-    color: var(--color-white);
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
+    background: var(--color-secondary);
+    color: var(--color-white);
   }
-  body, input, button{
+  
+  body, input, button {
     font-family: var(--font-serif);
     font-size: 1rem;
   }
 
-  h1, h2, h3, h4, h5, h6, strong{
+  h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
   }
 
-  button{
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
     cursor: pointer;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
   }
 `;
