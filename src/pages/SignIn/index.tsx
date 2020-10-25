@@ -8,9 +8,12 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import BackgroundImage from '../../components/BackgroundImage';
 
 import logo from '../../assets/logo.svg';
-import { Container, Content, Background, AnimatedContainer } from './styles';
+import signInBackgroundImg from '../../assets/sign-in-background.webp';
+
+import { Container, Content, AnimatedContainer } from './styles';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -79,12 +82,15 @@ const SignIn: React.FC = () => {
               name="email"
               type="email"
               placeholder="E-mail"
+              data-testid="signin-email-input"
             />
+
             <Input
               icon={FiLock}
               name="password"
               type="password"
               placeholder="Password"
+              data-testid="signin-password-input"
             />
 
             <Button type="submit" data-testid="signInBtn">
@@ -100,7 +106,7 @@ const SignIn: React.FC = () => {
           </Link>
         </AnimatedContainer>
       </Content>
-      <Background />
+      <BackgroundImage image={signInBackgroundImg} />
     </Container>
   );
 };

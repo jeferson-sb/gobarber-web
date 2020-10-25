@@ -11,10 +11,12 @@ import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import BackgroundImage from '../../components/BackgroundImage';
 
 import logo from '../../assets/logo.svg';
+import signUpBackgroundImg from '../../assets/sign-up-background.webp';
 
-import { Container, Content, Background, AnimatedContainer } from './styles';
+import { Container, Content, AnimatedContainer } from './styles';
 
 interface SignUpFormData {
   name: string;
@@ -70,7 +72,7 @@ const SignUp: React.FC = () => {
 
   return (
     <Container>
-      <Background />
+      <BackgroundImage image={signUpBackgroundImg} />
       <Content>
         <AnimatedContainer>
           <img src={logo} alt="GoBarber" />
@@ -79,17 +81,21 @@ const SignUp: React.FC = () => {
             <h1>Create an account</h1>
 
             <Input icon={FiUser} name="name" type="text" placeholder="Name" />
+
             <Input
               icon={FiMail}
               name="email"
               type="email"
               placeholder="E-mail"
+              data-testid="signup-email-input"
             />
+
             <Input
               type="password"
               icon={FiLock}
               name="password"
               placeholder="Password"
+              data-testid="signup-password-input"
             />
 
             <Button type="submit">Sign Up</Button>

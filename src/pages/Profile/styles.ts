@@ -5,7 +5,7 @@ export const Container = styled.div`
 
   > header {
     height: 144px;
-    background: #28262e;
+    background: var(--color-dark-100);
     display: flex;
     align-items: center;
 
@@ -15,7 +15,7 @@ export const Container = styled.div`
       margin: 0 auto;
 
       svg {
-        color: #999591;
+        color: var(--color-gray-600);
         width: 24px;
         height: 24px;
       }

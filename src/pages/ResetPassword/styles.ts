@@ -1,6 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-import signInBackgroundImg from '../../assets/sign-in-background.webp';
+import { slideRight } from '../../styles/animations';
 
 export const Container = styled.div`
   height: 100vh;
@@ -17,21 +17,9 @@ export const Content = styled.div`
 
   width: 100%;
   max-width: 700px;
-`;
 
-export const Background = styled.div`
-  flex: 1;
-  background: url(${signInBackgroundImg}) no-repeat center/cover;
-`;
-
-const slideRight = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to{
-    opacity: 1;
-    transform: translateX(0);
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    max-width: 50%;
   }
 `;
 

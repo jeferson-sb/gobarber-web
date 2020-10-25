@@ -8,9 +8,12 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import BackgroundImage from '../../components/BackgroundImage';
 
 import logo from '../../assets/logo.svg';
-import { Container, Content, Background, AnimatedContainer } from './styles';
+import signInBackgroundImg from '../../assets/sign-in-background.webp';
+
+import { Container, Content, AnimatedContainer } from './styles';
 
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
@@ -100,7 +103,7 @@ const SignIn: React.FC = () => {
           </Form>
         </AnimatedContainer>
       </Content>
-      <Background />
+      <BackgroundImage image={signInBackgroundImg} />
     </Container>
   );
 };
