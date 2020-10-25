@@ -16,7 +16,11 @@ export default createGlobalStyle`
     --color-primary: #ff9000;
     --color-secondary: #312e38;
     --color-primary--hover: hsl(var(--color-primary), 100%, 44%);
+    --color-dark-100: #28262e;
+    --color-dark-liver: #3e3b47;
     --color-gray-200: #f4ede8;
+    --color-gray-400: #666360;
+    --color-gray-600: #999591;
     --color-red-500: #c53030;
 
     --font-serif: 'Roboto Slab', serif;
