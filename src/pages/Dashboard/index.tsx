@@ -20,6 +20,7 @@ import {
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
+import defaultAvatar from '../../assets/default-avatar.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
@@ -155,10 +156,15 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <img src={logoImg} alt="Gobarber Logo" />
+          <img src={logoImg} alt="Gobarber Logo" width="138" height="80" />
 
           <Profile>
-            <img src={user.avatar_url} alt={user.name} />
+            <img
+              src={user.avatar_url || defaultAvatar}
+              alt={user.name}
+              width="56"
+              height="56"
+            />
             <div>
               <span>Welcome,</span>
               <Link to="/profile">
@@ -216,7 +222,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || defaultAvatar}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>
@@ -241,7 +247,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || defaultAvatar}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>

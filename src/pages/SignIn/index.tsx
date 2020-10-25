@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -29,10 +29,12 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
+        setLoading(() => !loading);
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -63,9 +65,11 @@ const SignIn: React.FC = () => {
           description:
             'An error has occurred while signing in, please check your credentials',
         });
+      } finally {
+        setLoading(() => !loading);
       }
     },
-    [signIn, addToast, history],
+    [signIn, addToast, history, loading],
   );
 
   return (
@@ -93,7 +97,7 @@ const SignIn: React.FC = () => {
               data-testid="signin-password-input"
             />
 
-            <Button type="submit" data-testid="signInBtn">
+            <Button type="submit" data-testid="signInBtn" loading={loading}>
               Sign In
             </Button>
 

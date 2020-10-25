@@ -15,6 +15,8 @@ import Button from '../../components/Button';
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth, User } from '../../hooks/auth';
 
+import defaultAvatar from '../../assets/default-avatar.png';
+
 interface ProfileFormData {
   name: string;
   email: string;
@@ -141,7 +143,7 @@ const Profile: React.FC = () => {
           }}
         >
           <AvatarInput>
-            <img src={user.avatar_url} alt={user.name} />
+            <img src={user.avatar_url || defaultAvatar} alt={user.name} />
             <label htmlFor="avatar">
               <FiCamera size={20} />
               <input
