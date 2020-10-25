@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 
 import ToastContainer from '../components/ToastContainer';
 
-interface ToastContextData {
+interface ToastContextProps {
   addToast(message: Omit<ToastMessage, 'id'>): void;
   removeToast(id: string): void;
 }
@@ -15,7 +15,7 @@ export interface ToastMessage {
   description?: string;
 }
 
-const ToastContext = createContext<ToastContextData>({} as ToastContextData);
+const ToastContext = createContext<ToastContextProps>({} as ToastContextProps);
 
 const ToastProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<ToastMessage[]>([]);
@@ -44,7 +44,7 @@ const ToastProvider: React.FC = ({ children }) => {
   );
 };
 
-function useToast(): ToastContextData {
+function useToast(): ToastContextProps {
   const context = useContext(ToastContext);
 
   if (!context) {
