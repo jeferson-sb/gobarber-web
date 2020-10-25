@@ -7,6 +7,9 @@
 
 </div>
 
+![alt Desktop Signin Mockup](.github/desktop-mockup-1.jpg)
+![alt Desktop Dashboard Mockup](.github/desktop-mockup-2.jpg)
+
 ## 💡 Project
 
 Gobarber is a full-stack application to help barbers scheduling appointments with their customers built with React, React Native and Node.js
