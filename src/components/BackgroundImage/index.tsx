@@ -10,4 +10,4 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({ image }) => {
   return <BackgroundContainer image={image} />;
 };
 
-export default BackgroundImage;
+export default React.memo(BackgroundImage);
