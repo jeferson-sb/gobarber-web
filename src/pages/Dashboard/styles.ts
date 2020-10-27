@@ -37,12 +37,6 @@ export const Profile = styled.div`
   align-items: center;
   margin-left: 80px;
 
-  img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-  }
-
   div {
     display: flex;
     flex-direction: column;

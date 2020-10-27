@@ -18,9 +18,9 @@ import {
   Appointment,
   Section,
 } from './styles';
+import Avatar from '../../components/Avatar';
 
 import logoImg from '../../assets/logo.svg';
-import defaultAvatar from '../../assets/default-avatar.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
@@ -159,8 +159,8 @@ const Dashboard: React.FC = () => {
           <img src={logoImg} alt="Gobarber Logo" width="138" height="80" />
 
           <Profile>
-            <img
-              src={user.avatar_url || defaultAvatar}
+            <Avatar
+              src={user.avatar_url}
               alt={user.name}
               width="56"
               height="56"
@@ -221,8 +221,8 @@ const Dashboard: React.FC = () => {
                 </span>
 
                 <div>
-                  <img
-                    src={appointment.user.avatar_url || defaultAvatar}
+                  <Avatar
+                    src={appointment.user.avatar_url}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>
@@ -246,8 +246,8 @@ const Dashboard: React.FC = () => {
                 </span>
 
                 <div>
-                  <img
-                    src={appointment.user.avatar_url || defaultAvatar}
+                  <Avatar
+                    src={appointment.user.avatar_url}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>

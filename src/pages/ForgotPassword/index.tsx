@@ -64,7 +64,7 @@ const ForgotPassword: React.FC = () => {
           description: 'An error has occurred while recovering your password',
         });
       } finally {
-        setLoading(false);
+        setLoading((prevValue) => !prevValue);
       }
     },
     [addToast],

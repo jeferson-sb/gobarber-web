@@ -67,12 +67,6 @@ export const AvatarInput = styled.div`
   position: relative;
   align-self: center;
 
-  img {
-    width: 186px;
-    height: 186px;
-    border-radius: 50%;
-  }
-
   label {
     position: absolute;
     width: 48px;
