@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, screen } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SignIn from '../../pages/SignIn';
 
@@ -9,17 +9,17 @@ const mockedAddToast = jest.fn();
 
 jest.mock('react-router-dom', () => {
   return {
-    useHistory: () => ({push: mockedHistoryPush,}),
+    useHistory: () => ({ push: mockedHistoryPush }),
     Link: ({ children }: { children: React.ReactNode }) => children,
   };
 });
 
 jest.mock('../../hooks/auth', () => {
-  return {useAuth: () => ({signIn: mockedSignIn,}),};
+  return { useAuth: () => ({ signIn: mockedSignIn }) };
 });
 
 jest.mock('../../hooks/toast', () => {
-  return {useToast: () => ({addToast: mockedAddToast,}),};
+  return { useToast: () => ({ addToast: mockedAddToast }) };
 });
 
 describe('SignIn Page', () => {
@@ -37,7 +37,7 @@ describe('SignIn Page', () => {
     userEvent.type(passwordField, '123123');
     userEvent.click(buttonElement);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(mockedHistoryPush).toHaveBeenCalledWith('/dashboard');
     });
   });
@@ -52,7 +52,7 @@ describe('SignIn Page', () => {
     userEvent.type(passwordField, '123123');
     userEvent.click(buttonElement);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(mockedHistoryPush).not.toHaveBeenCalled();
     });
   });
@@ -71,7 +71,7 @@ describe('SignIn Page', () => {
     userEvent.type(passwordField, '123123');
     userEvent.click(buttonElement);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(mockedAddToast).toHaveBeenCalledWith(
         expect.objectContaining({ type: 'error' }),
       );

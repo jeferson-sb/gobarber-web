@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait, screen, fireEvent } from '@testing-library/react';
+import { render, waitFor, screen, fireEvent } from '@testing-library/react';
 import Input from '../../components/Input';
 
 jest.mock('@unform/core', () => {
@@ -28,14 +28,14 @@ describe('Input component', () => {
 
     inputElement.focus();
 
-    await wait(() => {
+    await waitFor(() => {
       expect(containerElement).toHaveStyle('border-color: #ff9000');
       expect(containerElement).toHaveStyle('color: #ff9000');
     });
 
     inputElement.blur();
 
-    await wait(() => {
+    await waitFor(() => {
       expect(containerElement).not.toHaveStyle('border-color: #ff9000');
       expect(containerElement).not.toHaveStyle('color: #ff9000');
     });
@@ -46,11 +46,13 @@ describe('Input component', () => {
     const inputElement = screen.getByPlaceholderText('E-mail');
     const containerElement = screen.getByTestId('input-container');
 
-    fireEvent.change(inputElement, {target: { value: 'johndoe@example.com.br' },});
+    fireEvent.change(inputElement, {
+      target: { value: 'johndoe@example.com.br' },
+    });
 
     fireEvent.blur(inputElement);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(containerElement).toHaveStyle('color: #ff9000');
     });
   });
