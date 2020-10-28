@@ -22,7 +22,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "testing-library"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
