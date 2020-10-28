@@ -11,6 +11,7 @@ const Dashboard = lazy(() => import('../pages/Dashboard'));
 const ResetPassword = lazy(() => import('../pages/ResetPassword'));
 const ForgotPassword = lazy(() => import('../pages/ForgotPassword'));
 const Profile = lazy(() => import('../pages/Profile'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 const Routes: React.FC = () => (
   <Switch>
@@ -23,6 +24,7 @@ const Routes: React.FC = () => (
 
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route component={NotFound} />
     </Suspense>
   </Switch>
 );
